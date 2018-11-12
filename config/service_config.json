@@ -1,0 +1,12 @@
+{
+	"users": {
+		"session": {
+			"service": "user_service",
+			"ttl": "3000"
+		},
+		"getMetaLinks": {
+			"serviceUri": "http://localhost:3004/metaLinks/",
+			"ttl": "4000"
+		}
+	}
+}
