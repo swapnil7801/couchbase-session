@@ -1,4 +1,4 @@
-var userSessionData = {
+let userSessionData = {
     data: {
         isAuthenticated: true,
         sessionID: "chcoitu2wcg24rbnuvqwupcf",

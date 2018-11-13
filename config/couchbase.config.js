@@ -1,4 +1,4 @@
-var dbConfig={
+let dbConfig={
     name:"couchbase",
     bucket: "userlist",
     host: "localhost",
