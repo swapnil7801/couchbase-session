@@ -7,17 +7,20 @@
     "test": "mocha ./test/test.js"
   },
   "dependencies": {
+    "app-root-path": "^2.1.0",
     "assert": "1.4.1",
     "cookie-parser": "1.4.3",
     "couchbase": "2.6.0",
     "debug": "2.6.9",
     "ejs": "2.5.7",
     "express": "4.16.0",
-    "http-errors": "1.6.2",
+    "http-errors": "^1.6.2",
     "is-type-of": "1.2.1",
+    "lodash": "^4.17.11",
     "morgan": "1.9.0",
     "request": "2.88.0",
-    "request-promise": "4.2.2"
+    "request-promise": "4.2.2",
+    "winston": "^3.1.0"
   },
   "devDependencies": {
     "eslint": "5.9.0",

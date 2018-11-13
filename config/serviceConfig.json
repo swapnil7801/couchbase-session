@@ -1,7 +1,7 @@
 {
 	"users": {
 		"session": {
-			"service": "user_service",
+			"service": "userService",
 			"ttl": "3000"
 		},
 		"getMetaLinks": {
