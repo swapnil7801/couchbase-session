@@ -1,27 +1,29 @@
- var userService = {};
- var app = require('../app');
- var rp = require('request-promise');
+ let app = require('../app');
+ let rp = require('request-promise');
 
- userService.getSessionData = async function(sessionId='0', ttl) {
 
- 	var dbData = await app.dbAdapter.get(sessionId);
+class UserService{
+
+ async getSessionData(sessionId='0', ttl) {
+
+ 	let dbData = await app.dbAdapter.get(sessionId);
  	if (dbData) {
  		return dbData
  	} else {
- 		var profileData = await getProfileFormServer();
- 		var generatedId = 'sid' + Date.now()
- 		var updatedData = await app.dbAdapter.set(generatedId, profileData, ttl);
+ 		let profileData = await this.getProfileFormServer();
+ 		let generatedId = 'sid' + Date.now()
+ 		let updatedData = await app.dbAdapter.set(generatedId, profileData, ttl);
  		return updatedData;
  	}
  }
- userService.setResource = function(sid, data, callback) {
+  setResource(sid, data, callback) {
  	app.dbAdapter.get('1234').then((sessionData) => {
  		callback("result");
  	});
  }
 
- function getProfileFormServer() {
- 	var options = {
+  getProfileFormServer() {
+ 	let options = {
  		uri: 'http://localhost:3004/data',
  		headers: {
  			'User-Agent': 'Request-Promise'
@@ -40,4 +42,7 @@
  			});
  	})
  }
- module.exports = userService;
+}
+
+ 
+ module.exports = UserService;
