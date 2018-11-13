@@ -10,7 +10,7 @@ class userController {
         this.traverse(serviceConfig);
     }
     traverse(object) {
-        _.forIn(object, (value, key) => {
+        _.forOwn(object, (value, key) => {
             if (key === "service") {
                 object["service"] = require(`${appRoot}/${serviceBasePath}/${object[key]}`);
             }
@@ -29,7 +29,6 @@ class userController {
         let ttl = servConfig["ttl"];
         let genericApiObject = new genericApi();
         return genericApiObject.getSession(id, serviceUri, ttl);
-
     }
     serviceNotfound() {
         return new Promise((resolve, reject) => {

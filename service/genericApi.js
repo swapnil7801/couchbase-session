@@ -4,19 +4,23 @@ const logger = require("../config/winston");
 
 class GenericService {
 	async getSession(sessionId = '0', uri, ttl) {
-		let dbData = await app.dbAdapter.getSession(sessionId);
+		let sessionData = await app.dbAdapter.getSession(sessionId);
 		//get from db
-		if (dbData) {
-			return dbData
+		let data;
+		if (sessionData) {
+			return sessionData;
 		} else {
-			let data = await requestPromise.get(uri);
-			// let generatedId = 'sid' + Date.now();
+			try{
+			 data = await requestPromise.get(uri);
+		}catch(err){
+			logger.error(`uri error,${err}`);
+		}
 			let generatedId = `sid +${Date.now()}`;
 			let updatedData;
 			try {
 				updatedData = await app.dbAdapter.setSession(generatedId, JSON.parse(data), ttl);
 			} catch (err) {
-				logger.error(`getSession error,${err.status}`);
+				logger.error(`getSession error,${err}`);
 			}
 			return updatedData;
 		}

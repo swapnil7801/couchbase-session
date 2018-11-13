@@ -18,33 +18,25 @@ class CouchbaseStore {
         return this.pool;
     }
     async getSession(sid) {
-        let result;
         try {
-            result = await this.getQueryPromise(sid);
+            return await this.getQueryPromise(sid);
         } catch (err) {
             logger.error(`getSession error,${err.status}`);
         }
-        let session = null;
-        if (result) {
-            session = result;
-        }
-        return session
     };
     async setSession(sid, session, ttl) {
         let data = session;
-        let result;
         try {
-            result = await this.setQueryPromise(sid, data, parseInt(ttl));
+            return await this.setQueryPromise(sid, data, parseInt(ttl));
         } catch (err) {
             logger.error(`setSession error,${err.status}`);
         }
-        return result
     };
     async destroySession(sid) {
         console.log(" CouchbaseStore.prototype.destroy sid ", sid)
         let result;
         try {
-             result = await this.deleteQueryPromise(sid);
+            result = await this.deleteQueryPromise(sid);
         } catch (err) {
             logger.error(`destroySession error,${err.status}`);
         }
@@ -54,10 +46,8 @@ class CouchbaseStore {
         return new Promise((resolve, reject) => {
             connection.get(sid, (err, result) => {
                 if (result) {
-                    // console.log("returning result",result);
                     resolve(result.value);
                 } else if (err.code === 13) {
-                    // console.log("err",err);
                     resolve(null);
                 } else {
                     reject(err);
@@ -73,7 +63,6 @@ class CouchbaseStore {
             // console.log("setting datain couchbase store options",options,data);
             connection.upsert(sid, data, options, (err, result) => {
                 if (result) {
-                    // data.sid = sid;
                     let res = {
                         data: data,
                         sid: sid
